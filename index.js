@@ -12,7 +12,6 @@ postbox.use(
   );
 postbox.use(routes)
 
-postbox.use('/uploads',express.static('./uploads'))
 
 
 PORT = 4321 || process.env.PORT

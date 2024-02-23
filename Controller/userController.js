@@ -55,34 +55,34 @@ exports.getdetailsController = async(req,res)=>{
     
 }
 exports.updateuserController = async(req,res)=>{
-    // dets=req.body
-    // console.log(dets);
-    
-    // console.log(id);
-    
-    // const image = req.file.filename
-    // console.log(image);
-    
-    // console.log(dets);
-    
-    // const hal = {email, username, password, image}
-    // console.log(hal);
-
-    // console.log(hal);
-    // res.status(290).json(hal)
-    // console.log(req.body);
     const options = { new : true}
     const dets = req.body
+    const image = req.file.filename
     id = dets._id
+    const email = dets.email
+    const username = dets.username
+    const password = dets.password
+    const toupdate = { email , username, password, image}
     try {
-        const result = await users.findByIdAndUpdate( id , dets , options)
-        // result.save()
-        // const result = await users.find({email})
-        // hal.save()
-        // console.log(result);
+        const result = await users.findByIdAndUpdate( id , toupdate , options)
         res.status(290).json(result)
     } catch (error) {
         res.status(490).json(error)
         
     }
 }
+
+exports.updateuserController2 = async(req,res)=>{
+    const options = { new : true}
+    const dets = req.body
+
+    id = dets._id
+    try {
+        const result = await users.findByIdAndUpdate( id , dets , options)
+        res.status(290).json(result)
+    } catch (error) {
+        res.status(490).json(error)
+        
+    }
+}
+
