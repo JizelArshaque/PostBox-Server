@@ -54,3 +54,43 @@ exports.getsentmail = async(req,res)=>{
     }
 }
 
+exports.getallmail= async(req,res)=>{
+    const id = req.params
+    const fr = id.id
+    console.log(fr);
+    try {
+        const reci= await mails.find({to:fr})
+        const from = await mails.find({from:fr})
+        console.log('from',reci);
+        console.log('to',from);
+        const all = [...reci,...from]
+        res.status(210).json(all)
+    } catch (error) {
+        res.status(451).json(error)
+    }
+
+}
+
+exports.getSingleMail=async(req,res)=>{
+    const {id} = req.params
+    console.log(id);
+    try {
+        const mail = await mails.find({_id:id})
+        console.log('sxxs',mail);
+        res.status(211).json(mail)
+        
+    } catch (error) {
+        res.status(451).json(error)
+        
+    }
+}
+exports.deleteMailController = async(req,res)=>{
+    const {id} = req.params
+    try {
+        await mails.findByIdAndDelete({_id:id})
+        res.status(231).json('Deleted!')
+    } catch (error) {
+        res.status(417).json(error)
+    }
+}
+
