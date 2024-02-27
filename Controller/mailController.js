@@ -4,9 +4,9 @@ exports.sendmailController1=async(req,res)=>{
     const userId = req.payload
     console.log(userId);
     try {
-        const { from , to, subject, message , date } = req.body
+        const { from , to, subject, message , date, image } = req.body
         const newMail = new mails({
-            from , to, subject, message , date 
+            from , to, subject, message , date ,image
         })
         newMail.save()
         res.status(241).json('mail sent!')
