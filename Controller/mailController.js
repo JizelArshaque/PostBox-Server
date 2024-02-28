@@ -4,7 +4,7 @@ exports.sendmailController1=async(req,res)=>{
     const userId = req.payload
     console.log(userId);
     try {
-        const { from , to, subject, message , date, image } = req.body
+        const { from , to, subject, message , date,image } = req.body
         const newMail = new mails({
             from , to, subject, message , date ,image
         })
@@ -63,7 +63,7 @@ exports.getallmail= async(req,res)=>{
         const from = await mails.find({from:fr})
         console.log('from',reci);
         console.log('to',from);
-        const all = [...reci,...from]
+        const all = [...from,...reci]
         res.status(210).json(all)
     } catch (error) {
         res.status(451).json(error)
@@ -92,5 +92,19 @@ exports.deleteMailController = async(req,res)=>{
     } catch (error) {
         res.status(417).json(error)
     }
+}
+
+exports.getInboxController = async(req,res)=>{
+    const id = req.params
+    const to = id.id
+    try {
+        const inboxMail= await mails.find({to})
+        console.log(inboxMail);
+        res.status(210).json(inboxMail)
+    } catch (error) {
+        res.status(451).json(error)
+        
+    }
+
 }
 

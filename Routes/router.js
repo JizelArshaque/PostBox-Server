@@ -61,4 +61,7 @@ router.get('/get/trash',jwtMiddleware,trashController.getTrash )
 // remove imp
 router.delete('/delete/trash/:id',trashController.removeTrash)
 
+// nboxMail
+router.get('/inboxMail/:id',jwtMiddleware,mailController.getInboxController)
+
 module.exports = router
