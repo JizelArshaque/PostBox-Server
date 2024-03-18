@@ -64,4 +64,10 @@ router.delete('/delete/trash/:id',trashController.removeTrash)
 // nboxMail
 router.get('/inboxMail/:id',jwtMiddleware,mailController.getInboxController)
 
+
+// update mail read stats
+
+router.put('/update/stats',mailController.updatestatsController)
+
+
 module.exports = router

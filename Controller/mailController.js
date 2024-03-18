@@ -4,11 +4,11 @@ exports.sendmailController1=async(req,res)=>{
     const userId = req.payload
     console.log(userId);
     try {
-        const { from , to, subject, message , date,image } = req.body
+        const { from , to, subject, message , date,image,stat } = req.body
         const newMail = new mails({
-            from , to, subject, message , date ,image
+            from , to, subject, message , date ,image,stat
         })
-        newMail.save()
+        await newMail.save()
         res.status(241).json('mail sent!')
         
         
@@ -22,11 +22,11 @@ exports.sendmailController2 = async(req,res)=>{
     try {
         console.log(req.body);
         console.log(req.file.filename);
-        const { from , to, subject, message , date } = req.body
+        const { from , to, subject, message , date,stat } = req.body
         const image = req.file.filename
         console.log(image);
         const newMail = new mails({
-            from , to, subject, message , date ,image
+            from , to, subject, message , date ,image,stat
         })
         console.log(newMail);
         newMail.save()
@@ -106,5 +106,21 @@ exports.getInboxController = async(req,res)=>{
         
     }
 
+}
+
+exports.updatestatsController= async(req,res)=>{
+    const options = { new : true}
+    const dets = req.body
+    id = dets._id
+    // console.log(dets);
+    const stat = dets.stat
+    const toupdate = { stat }
+    try {
+        const result = await mails.findByIdAndUpdate( id , toupdate , options)
+        res.status(290).json(result)
+    } catch (error) {
+        res.status(490).json(error)
+        
+    }
 }
 

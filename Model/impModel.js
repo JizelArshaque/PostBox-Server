@@ -26,6 +26,10 @@ const impSchema = mongoose.Schema({
     userId:{
         type:String,
         require:true
+    },
+    stat:{
+        type:String,
+        require:true
     }
 })
 

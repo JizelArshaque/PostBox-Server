@@ -2,7 +2,7 @@ const imps = require('../Model/impModel')
 
 exports.addToImportantController= async(req,res)=>{
     const userId= req.payload
-    const {from ,to , subject, message, date ,image} =req.body
+    const {from ,to , subject, message, date ,image,stat} =req.body
     // console.log('hwevsdibsd',userId,req.body);
         try {
             const existing = await imps.findOne({userId,message})
@@ -13,13 +13,13 @@ exports.addToImportantController= async(req,res)=>{
             }else{                
                 if(req.body.image){
                     const Nimp = new imps({
-                        from ,to , subject, message, date ,image , userId
+                        from ,to , subject, message, date ,image , userId,stat
                     })
                     await Nimp.save()
                     res.status(231).json('Marked Important')
                 }else{
                     const Nimp = new imps({
-                        from ,to , subject, message, date ,userId
+                        from ,to , subject, message, date ,userId,stat
                     })
                     await Nimp.save()
                     res.status(231).json('Marked Important')

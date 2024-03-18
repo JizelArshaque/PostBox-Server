@@ -23,6 +23,10 @@ const mailSchema = mongoose.Schema({
     },
     image:{
         type:String,
+    },
+    stat:{
+        type:String,
+        require:true
     }
 })
 

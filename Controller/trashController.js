@@ -3,7 +3,7 @@ const trashs = require('../Model/trashModel')
 
 exports.addToTrash= async(req,res)=>{
     const userId= req.payload
-    const {from ,to , subject, message, date ,image} =req.body
+    const {from ,to , subject, message, date ,image,stat} =req.body
     
     console.log('hwevsdibsd',userId,req.body);
         try {
@@ -15,13 +15,13 @@ exports.addToTrash= async(req,res)=>{
             }else{                
                 if(req.body.image){
                     const Nimp = new trashs({
-                        from ,to , subject, message, date ,image , userId
+                        from ,to , subject, message, date ,image , userId,stat
                     })
                     await Nimp.save()
                     res.status(231).json('Moved to trash')
                 }else{
                     const Nimp = new trashs({
-                        from ,to , subject, message, date ,userId
+                        from ,to , subject, message, date ,userId,stat
                     })
                     await Nimp.save()
                     res.status(231).json('Moved To trash')
